@@ -11,6 +11,6 @@ import java.util.List;
 public class CreateAndEditRestaurantRequest {
     private final String name;
     private final String address;
-    private final List<CreateAndEditRestaurantRequestMenu> menu;
+    private final List<CreateAndEditRestaurantRequestMenu> menus;
 
 }
