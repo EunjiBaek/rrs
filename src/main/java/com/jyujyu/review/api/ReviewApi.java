@@ -3,7 +3,9 @@ package com.jyujyu.review.api;
 
 import com.jyujyu.review.api.request.CreateReviewRequest;
 import com.jyujyu.review.service.ReviewService;
+import com.jyujyu.review.service.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,5 +23,14 @@ public class ReviewApi {
     @DeleteMapping("/review/{reviewId}")
     public void deleteReview(@PathVariable("reviewId") Long reviewId) {
         reviewService.deleteReview(reviewId);
+    }
+
+    @GetMapping("/restaurant/{restaurantId}/reviews")
+    public ReviewDto getRestaurantReviews(
+            @PathVariable("restaurantId") Long restaurantId,
+            @RequestParam("offset") Integer offset,
+            @RequestParam("limit") Integer limit
+    ) {
+        return reviewService.getRestaurantReviews(restaurantId, PageRequest.of(offset / limit, limit));
     }
 }
